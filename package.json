@@ -49,7 +49,7 @@
     "url": "https://github.com/glennflanagan/react-collapsible/issues"
   },
   "scripts": {
-    "build": "babel src/Collapsible.js > dist/Collapsible.js",
+    "build": "babel src --out-dir dist",
     "prepublish": "npm run build"
   }
 }
