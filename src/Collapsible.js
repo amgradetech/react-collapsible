@@ -26,6 +26,7 @@ var Collapsible = React.createClass({
     ]),
     triggerDisabled: React.PropTypes.bool,
     onOpen: React.PropTypes.func,
+    onClose: React.PropTypes.func,
     lazyRender: React.PropTypes.bool,
     overflowWhenOpen: React.PropTypes.oneOf([
       'hidden',
@@ -168,7 +169,11 @@ var Collapsible = React.createClass({
       shouldSwitchAutoOnNextCycle: true,
       height: this.refs.inner.offsetHeight,
       overflow: 'hidden',
-    });
+    }, function() {
+      if (typeof this.props.onClose === 'function') {
+        this.props.onClose();
+      }
+    }.bind(this));
   },
 
   openCollapsible: function() {
@@ -181,7 +186,7 @@ var Collapsible = React.createClass({
       if (typeof this.props.onOpen === 'function') {
         this.props.onOpen();
       }
-    });
+    }.bind(this));
   },
 
   makeResponsive: function() {

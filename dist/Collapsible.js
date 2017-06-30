@@ -31,6 +31,7 @@ var Collapsible = _react2.default.createClass({
     triggerWhenOpen: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.element]),
     triggerDisabled: _react2.default.PropTypes.bool,
     onOpen: _react2.default.PropTypes.func,
+    onClose: _react2.default.PropTypes.func,
     lazyRender: _react2.default.PropTypes.bool,
     overflowWhenOpen: _react2.default.PropTypes.oneOf(['hidden', 'visible', 'auto', 'scroll', 'inherit', 'initial', 'unset']),
     triggerSibling: _react2.default.PropTypes.element
@@ -160,7 +161,11 @@ var Collapsible = _react2.default.createClass({
       shouldSwitchAutoOnNextCycle: true,
       height: this.refs.inner.offsetHeight,
       overflow: 'hidden'
-    });
+    }, function () {
+      if (typeof this.props.onClose === 'function') {
+        this.props.onClose();
+      }
+    }.bind(this));
   },
 
   openCollapsible: function openCollapsible() {
@@ -173,7 +178,7 @@ var Collapsible = _react2.default.createClass({
       if (typeof this.props.onOpen === 'function') {
         this.props.onOpen();
       }
-    });
+    }.bind(this));
   },
 
   makeResponsive: function makeResponsive() {
